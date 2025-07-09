@@ -1,0 +1,55 @@
+# Nome do fluxo de trabalho
+name: Deploy to GitHub Pages
+
+# Define quando este fluxo de trabalho deve ser executado
+on:
+  # Executa toda vez que você envia código para a branch 'main'
+  push:
+    branches:
+      - main
+
+# Permissões necessárias para o fluxo de trabalho poder publicar no GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Tarefas a serem executadas
+jobs:
+  # Tarefa de build e deploy
+  deploy:
+    runs-on: ubuntu-latest # Usa uma máquina virtual Linux para executar os comandos
+    steps:
+      # 1. Baixa o código do seu repositório
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Configura o ambiente Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Usa a versão 20 do Node.js
+          cache: 'npm'
+
+      # 3. Instala as dependências do projeto (como React, Vite, etc.)
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Compila o projeto (cria a pasta 'dist')
+      - name: Build
+        run: npm run build
+
+      # 5. Configura o GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 6. Envia a pasta 'dist' para o GitHub Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      # 7. Finaliza a publicação
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
