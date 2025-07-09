@@ -28,8 +28,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Usa a versão 20 do Node.js
-          cache: 'npm'
+          node-version: '20'```
+
 
       # 3. Instala as dependências do projeto (como React, Vite, etc.)
       - name: Install dependencies
