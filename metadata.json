@@ -1,0 +1,5 @@
+{
+  "name": "Organograma Corporativo Interativo",
+  "description": "Uma aplicação web para visualizar e explorar um organograma corporativo a partir de um arquivo Excel. Permite o upload de dados, filtragem por empresa, time e busca por nome ou cargo, e exibe a hierarquia em um formato de árvore interativa com detalhes dos colaboradores.",
+  "requestFramePermissions": []
+}
